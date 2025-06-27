@@ -1,1 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+@plugin "daisyui";
+
+body {
+  font-family: 'Inter';
+  margin: 0;
+  padding: 32px;
+}
+
+button {
+  border: 1px solid rgba(0, 0, 0, 0);
+  padding: 12px;
+  border-radius: 8px;
+}

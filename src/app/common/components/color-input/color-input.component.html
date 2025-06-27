@@ -1,0 +1,7 @@
+<label class="">{{ category() }}</label><br />
+<div class="flex gap-4">
+  <div class="color-input-container">
+    <input class="color-input" type="color" [formControl]="control()!" [value]="control()?.value" />
+  </div>
+  <input class="input w-fit" [formControl]="control()!" [value]="control()?.value" />
+</div>

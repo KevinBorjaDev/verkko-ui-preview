@@ -1,0 +1,12 @@
+<div class="flex flex-col gap-4">
+  <h1 class="text-xl font-bold">Choose your colors</h1>
+  <form [formGroup]="paletteForm" (submit)="submit()">
+    <div *ngFor="let category of categories" style="margin-bottom: 1rem;">
+      <app-color-input [category]="category" [control]="getControl(category)"></app-color-input>
+    </div>
+    <div class="flex gap-4 justify-end">
+      <button class="btn btn-neutral w-fit" type="submit" [disabled]="paletteForm.invalid">Apply</button>
+      <button class="btn btn-outline btn-primary w-fit">Save</button>
+    </div>
+  </form>
+</div>
