@@ -2,10 +2,11 @@ export const PALETTE = {
   PRIMARY: '#6750A4',
   SECONDARY: '#D4CBE7',
   BACKGROUND: '#938F96',
+  ACCENT: '#E1B7C3',
+  ERROR: '#E46262',
+  SUCCESS: '#83B484',
   TEXT_PRIMARY: '#FFFFFF',
   TEXT_SECONDARY: '#000000',
-  ACCENT: '#E1B7C3',
-  ERROR: '#FF0000',
-  SUCCESS: '#B58392',
-  BUTTON_TEXT_COLOR: '#000000'
 }
+
+export type Mode = "mobile" | "desktop";

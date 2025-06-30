@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AppService } from '../../app.service';
-import { PALETTE } from '../../common/constants/app.constants';
+import { Mode, PALETTE } from '../../common/constants/app.constants';
 import { ColorI } from '../../common/interfaces/color.interface';
 import { ColorInputComponent } from "../../common/components/color-input/color-input.component";
 
@@ -15,22 +15,30 @@ import { ColorInputComponent } from "../../common/components/color-input/color-i
 export class AdminPanelComponent {
   private fb = inject(FormBuilder);
 
+  mode = this.fb.group({
+    mode: new FormControl()
+  })
+
   categories = Object.keys(PALETTE) as Array<keyof typeof PALETTE>;
 
   paletteForm = this.fb.group({});
 
-  constructor(private appService: AppService) {}
+  constructor(private appService: AppService) { }
 
   ngOnInit(): void {
-    this.categories.forEach(cat => {
-      console.log('CATEGORIA', cat);
-      this.paletteForm.addControl(cat, new FormControl(PALETTE[cat], Validators.required))
-    });
-    console.log('FORM GENERADO', this.paletteForm);
+    this.generateForm();
+    this.formMode?.setValue(this.appService.getMode());
+    this.formMode?.valueChanges.subscribe((value) => {
+      this.appService.setMode(value)
+    })
   }
 
-  getControl(name: string){
+  getControl(name: string) {
     return this.paletteForm.get(name) as FormControl;
+  }
+
+  get formMode(){
+    return this.mode.get('mode');
   }
 
   submit(): void {
@@ -42,5 +50,11 @@ export class AdminPanelComponent {
     } else {
       // this.colores.markAllAsTouched();
     }
+  }
+
+  generateForm() {
+    this.categories.forEach(cat => {
+      this.paletteForm.addControl(cat, new FormControl(PALETTE[cat], Validators.required))
+    });
   }
 }

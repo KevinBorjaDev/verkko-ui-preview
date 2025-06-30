@@ -12,6 +12,6 @@
 
 <div class="flex gap-12">
   <app-admin-panel></app-admin-panel>
-  <app-desktop-ui-landing class="w-full"></app-desktop-ui-landing>
-  <!-- <app-mobile-ui></app-mobile-ui> -->
+  <app-desktop-ui-landing class="w-full rounded" *ngIf="mode === 'desktop'"></app-desktop-ui-landing>
+  <app-mobile-ui *ngIf="mode === 'mobile'"></app-mobile-ui>
 </div>

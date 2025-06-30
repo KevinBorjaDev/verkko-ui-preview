@@ -1,5 +1,11 @@
 <div class="flex flex-col gap-4">
-  <h1 class="text-xl font-bold">Choose your colors</h1>
+  <div class="flex">
+    <h1 class="text-xl font-bold">Choose your colors</h1>
+    <div class="join" [formGroup]="mode">
+      <input class="join-item btn" type="radio" name="mode" aria-label="Desktop" [value]="'desktop'" formControlName="mode"/>
+      <input class="join-item btn" type="radio" name="mode" aria-label="Mobile" [value]="'mobile'"  formControlName="mode"/>
+    </div>
+  </div>
   <form [formGroup]="paletteForm" (submit)="submit()">
     <div *ngFor="let category of categories" style="margin-bottom: 1rem;">
       <app-color-input [category]="category" [control]="getControl(category)"></app-color-input>

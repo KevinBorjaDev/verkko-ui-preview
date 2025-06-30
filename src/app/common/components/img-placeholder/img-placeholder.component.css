@@ -1,0 +1,23 @@
+/* .diagonal-x {
+  position: relative;
+  overflow: hidden;
+}
+
+.diagonal-x::before,
+.diagonal-x::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 2px; /* grosor de la línea */
+  /*height: 100%;
+  background: #bbb; /* color de la línea */
+/*}
+
+.diagonal-x::before {
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.diagonal-x::after {
+  transform: translateX(-50%) rotate(-45deg);
+} */

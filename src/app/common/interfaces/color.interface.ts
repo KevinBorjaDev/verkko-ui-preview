@@ -7,5 +7,4 @@ export interface ColorI {
   TEXT_SECONDARY: string;
   ERROR: string;
   SUCCESS: string;
-  BUTTON_TEXT_COLOR: string;
 }

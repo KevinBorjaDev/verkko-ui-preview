@@ -1,48 +1,50 @@
-<!-- Solo se muestra si hay una paleta cargada -->
-<div [ngStyle]="{ backgroundColor: palette.BACKGROUND}">
-
-  <!-- Header -->
-  <header class="pt-4 pb-4 pl-8 pr-8" [ngStyle]="{ backgroundColor: palette.PRIMARY, color: palette.TEXT_PRIMARY }">
-    <nav class="flex justify-between">
-      <span class="preview-logo">MiApp</span>
-      <ul class="flex gap-2">
-        <li><a href="#" class="preview-link">Inicio</a></li>
-        <li><a href="#" class="preview-link">Servicios</a></li>
-        <li><a href="#" class="preview-link">Contacto</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <!-- Hero -->
-  <section class="flex items-center justify-around min-h-[60vh]">
-      <div class="flex flex-col gap-4">
-        <h1 class="text-5xl" [ngStyle]="{ color: palette.TEXT_PRIMARY}">Welcome to your App</h1>
-        <p class="text-lg" [ngStyle]="{ color: palette.TEXT_SECONDARY}">
-          This is an app to visualize a color palette
-        </p>
+<div class="mockup-window bg-gray-200 border border-base-300">
+  <div [ngStyle]="{ backgroundColor: palette.BACKGROUND}" class="relative">
   
-        <div class="flex gap-2">
-          <button [ngStyle]="{ backgroundColor: palette.ACCENT, color: palette.BUTTON_TEXT_COLOR }">Let's start</button>
-          <button [ngStyle]="{ backgroundColor: palette.SECONDARY, color: palette.BUTTON_TEXT_COLOR }">See More</button>
+    <!-- Header -->
+    <header class="pt-4 pb-4 pl-8 pr-8" [ngStyle]="{ backgroundColor: palette.PRIMARY }" [style.color]="palette.PRIMARY | autoColor">
+      <nav class="flex justify-between">
+        <span class="preview-logo">YourApp</span>
+        <ul class="flex gap-4">
+          <li><a href="#" class="preview-link">Home</a></li>
+          <li><a href="#" class="preview-link">Services</a></li>
+          <li><a href="#" class="preview-link">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+  
+    <!-- Hero -->
+    <section class="flex items-center justify-around min-h-[60vh]">
+        <div class="flex flex-col gap-4">
+          <h1 class="text-5xl" [ngStyle]="{ color: palette.TEXT_PRIMARY}">Welcome to your App</h1>
+          <p class="text-lg" [ngStyle]="{ color: palette.TEXT_SECONDARY}">
+            This is an app to help you visualize a color palette of your choice.
+          </p>
+  
+          <div class="flex gap-2">
+            <button class="button" [ngStyle]="{ backgroundColor: palette.ACCENT } " [style.color]="palette.ACCENT | autoColor">Let's start</button>
+            <button class="button" [ngStyle]="{ backgroundColor: palette.SECONDARY }" [style.color]="palette.SECONDARY | autoColor">See More</button>
+          </div>
         </div>
+        <!-- <img src="/hero-img.png"/> -->
+         <svg xmlns="http://www.w3.org/2000/svg" width="25%" height="25%" viewBox="0 0 24 24"><path [attr.fill]="palette.ACCENT" d="M19 2H5a3.01 3.01 0 0 0-3 3v8.86l3.88-3.88a3.075 3.075 0 0 1 4.24 0l2.871 2.887l.888-.888a3.01 3.01 0 0 1 4.242 0L22 15.86V5a3.01 3.01 0 0 0-3-3" opacity="0.5"/><path [attr.fill]="palette.SECONDARY" d="M10.12 9.98a3.075 3.075 0 0 0-4.24 0L2 13.86V19a3.01 3.01 0 0 0 3 3h14a3 3 0 0 0 2.16-.92z"/><path [attr.fill]="palette.PRIMARY" d="m22 15.858l-3.879-3.879a3.01 3.01 0 0 0-4.242 0l-.888.888l8.165 8.209c.542-.555.845-1.3.844-2.076z" opacity="0.25"/></svg>
+    </section>
+  
+    <!-- Toasts -->
+    <div class="absolute bottom-8 right-8 flex flex-col gap-2 z-50 w-[90%] max-w-xs items-end"
+      style="pointer-events: none;">
+      <div class="rounded shadow p-4 w-full text-center" [ngStyle]="{ backgroundColor: palette.SUCCESS }" [style.color]="palette.SUCCESS | autoColor">
+        ¡Operación realizada con éxito!
       </div>
-      <!-- <img src="/hero-img.png"/> -->
-       <svg xmlns="http://www.w3.org/2000/svg" width="25%" height="25%" viewBox="0 0 24 24"><path [attr.fill]="palette.ACCENT" d="M19 2H5a3.01 3.01 0 0 0-3 3v8.86l3.88-3.88a3.075 3.075 0 0 1 4.24 0l2.871 2.887l.888-.888a3.01 3.01 0 0 1 4.242 0L22 15.86V5a3.01 3.01 0 0 0-3-3" opacity="0.5"/><path [attr.fill]="palette.SECONDARY" d="M10.12 9.98a3.075 3.075 0 0 0-4.24 0L2 13.86V19a3.01 3.01 0 0 0 3 3h14a3 3 0 0 0 2.16-.92z"/><path [attr.fill]="palette.PRIMARY" d="m22 15.858l-3.879-3.879a3.01 3.01 0 0 0-4.242 0l-.888.888l8.165 8.209c.542-.555.845-1.3.844-2.076z" opacity="0.25"/></svg>
-  </section>
-
-  <!-- Toasts -->
-  <div class="preview-toasts">
-    <div class="toast success" [ngStyle]="{ backgroundColor: palette.SUCCESS, color: 'white' }">
-      ¡Operación realizada con éxito!
+      <div class="rounded shadow p-4 w-full text-center" [ngStyle]="{ backgroundColor: palette.ERROR}" [style.color]="palette.ERROR | autoColor"> 
+        Ocurrió un error inesperado.
+      </div>
     </div>
-    <div class="toast error" [ngStyle]="{ backgroundColor: palette.ERROR, color: 'white' }">
-      Ocurrió un error inesperado.
-    </div>
+  
+    <!-- Footer -->
+    <footer class="p-8" [ngStyle]="{ backgroundColor: palette.PRIMARY }" [style.color]="palette.PRIMARY | autoColor">
+      <p>© 2025 YourApp. All rights reserved.</p>
+    </footer>
+  
   </div>
-
-  <!-- Footer -->
-  <footer class="p-8" [ngStyle]="{ backgroundColor: palette.PRIMARY, color: 'white' }">
-    <p>© 2025 YourApp. All rights reserved.</p>
-  </footer>
-
 </div>

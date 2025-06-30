@@ -6,9 +6,3 @@ body {
   margin: 0;
   padding: 32px;
 }
-
-button {
-  border: 1px solid rgba(0, 0, 0, 0);
-  padding: 12px;
-  border-radius: 8px;
-}

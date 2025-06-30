@@ -1,28 +1,3 @@
-.mobile-preview {
-  width: 375px;
-  border: 1px solid #ccc;
-  border-radius: 15px;
-  overflow: hidden;
-}
-
-.mobile-header {
-  padding: 1rem;
-  color: white;
-}
-
-.mobile-body {
-  padding: 1rem;
-}
-
-.mobile-body .card {
-  padding: 1rem;
-  border-radius: 8px;
-  margin-bottom: 1rem;
-}
-
-.mobile-body button {
-  padding: 0.5rem 1rem;
-  border: none;
-  color: white;
-  border-radius: 50%;
+.header-shadow {
+  box-shadow: 6px 8px 16px -16px rgba(0, 0, 0, 0.54)
 }
