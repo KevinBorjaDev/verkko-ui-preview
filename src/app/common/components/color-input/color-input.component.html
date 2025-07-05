@@ -1,7 +1,9 @@
-<label class="">{{ category() }}</label><br />
-<div class="flex gap-4">
-  <div class="color-input-container">
-    <input class="color-input" type="color" [formControl]="control()!" [value]="control()?.value" />
+<div class="flex flex-col gap-1">
+  <label class="">{{ category() | removeUnderscore | titlecase }}</label>
+  <div class="flex gap-4">
+    <div class="color-input-container">
+      <input class="color-input" type="color" [formControl]="control()!" [value]="control()?.value" />
+    </div>
+    <input class="input grow-1 " [formControl]="control()!" [value]="control()?.value" />
   </div>
-  <input class="input w-fit" [formControl]="control()!" [value]="control()?.value" />
 </div>

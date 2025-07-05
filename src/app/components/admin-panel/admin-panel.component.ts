@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AppService } from '../../app.service';
-import { Mode, PALETTE } from '../../common/constants/app.constants';
-import { ColorI } from '../../common/interfaces/color.interface';
 import { ColorInputComponent } from "../../common/components/color-input/color-input.component";
+import { PALETTE } from '../../common/constants/app.constants';
+import { ColorI } from '../../common/interfaces/color.interface';
+import { PaletteService } from '../../common/services/palette.service';
 
 @Component({
   selector: 'app-admin-panel',
@@ -23,7 +24,8 @@ export class AdminPanelComponent {
 
   paletteForm = this.fb.group({});
 
-  constructor(private appService: AppService) { }
+  paletteService = inject(PaletteService);
+  appService = inject(AppService)
 
   ngOnInit(): void {
     this.generateForm();
@@ -56,5 +58,35 @@ export class AdminPanelComponent {
     this.categories.forEach(cat => {
       this.paletteForm.addControl(cat, new FormControl(PALETTE[cat], Validators.required))
     });
+  }
+
+  exportAsJson(){
+    const content = this.paletteService.exportJsonCamel(this.paletteForm.getRawValue());
+    this.paletteService.download(content, 'json.palette.json', 'application/json');
+  }
+
+  exportAsCss(){
+    const content = this.paletteService.exportCssVariables(this.paletteForm.getRawValue());
+    this.paletteService.download(content, 'css.palette.css', 'text/css');
+  }
+
+  exportAsTailwind(){
+    const content = this.paletteService.exportTailwindConfig(this.paletteForm.getRawValue());
+    this.paletteService.download(content, 'tailwind.config.js', 'application/javascript');
+  }
+
+  exportAsScss(){
+    const content = this.paletteService.exportScssVariables(this.paletteForm.getRawValue());
+    this.paletteService.download(content, 'scss.palette.scss', 'text/plain');
+  }
+
+  exportAsXml(){
+    const content = this.paletteService.exportAndroidXml(this.paletteForm.getRawValue());
+    this.paletteService.download(content, 'colors.xml', 'application/xml');
+  }
+
+  exportAsSwift(){
+    const content = this.paletteService.exportSwiftUIColor(this.paletteForm.getRawValue());
+    this.paletteService.download(content, 'palette.swift', 'text/plain');
   }
 }

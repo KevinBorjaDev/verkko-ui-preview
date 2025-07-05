@@ -1,18 +1,34 @@
 <div class="flex flex-col gap-4">
-  <div class="flex">
-    <h1 class="text-xl font-bold">Choose your colors</h1>
+  <div class="flex gap-4">
+    <h1 class="text-xl font-bold self-center">Choose your view </h1>
     <div class="join" [formGroup]="mode">
-      <input class="join-item btn" type="radio" name="mode" aria-label="Desktop" [value]="'desktop'" formControlName="mode"/>
-      <input class="join-item btn" type="radio" name="mode" aria-label="Mobile" [value]="'mobile'"  formControlName="mode"/>
+      <input class="join-item btn" type="radio" name="mode" aria-label="Desktop" [value]="'desktop'"
+        formControlName="mode" />
+      <input class="join-item btn" type="radio" name="mode" aria-label="Mobile" [value]="'mobile'"
+        formControlName="mode" />
     </div>
   </div>
   <form [formGroup]="paletteForm" (submit)="submit()">
+    <!-- <h1 class="text-xl font-bold">Pick your colors</h1> -->
     <div *ngFor="let category of categories" style="margin-bottom: 1rem;">
       <app-color-input [category]="category" [control]="getControl(category)"></app-color-input>
     </div>
     <div class="flex gap-4 justify-end">
-      <button class="btn btn-neutral w-fit" type="submit" [disabled]="paletteForm.invalid">Apply</button>
-      <button class="btn btn-outline btn-primary w-fit">Save</button>
+      <button class="btn btn-neutral w-fit" type="submit" [disabled]="paletteForm.invalid">Preview</button>
+      <div class="dropdown dropdown-top">
+        <div tabindex="0" role="button" class="btn btn-outline btn-primary w-fit">
+          <span>Export</span>
+          <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m17.5 8.086l-5.5 5.5l-5.5-5.5L5.086 9.5L12 16.414L18.914 9.5z"/></svg> -->
+        </div>
+        <ul tabindex="0" class="dropdown-content menu bg-gray-200 rounded-box z-1 w-52 p-2 shadow-sm">
+          <li><a (click)="exportAsJson()">JSON</a></li>
+          <li><a (click)="exportAsCss()">CSS Variables</a></li>
+          <li><a (click)="exportAsTailwind()">Tailwind Config</a></li>
+          <li><a (click)="exportAsScss()">SCSS Variables</a></li>
+          <li><a (click)="exportAsXml()">Android XML</a></li>
+          <li><a (click)="exportAsSwift()">Switf UI Color</a></li>
+        </ul>
+      </div>
     </div>
   </form>
 </div>

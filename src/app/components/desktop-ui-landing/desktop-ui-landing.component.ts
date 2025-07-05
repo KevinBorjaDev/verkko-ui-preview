@@ -1,9 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, WritableSignal } from '@angular/core';
 import { AppService } from '../../app.service';
 import { ColorI } from '../../common/interfaces/color.interface';
-import { PALETTE } from '../../common/constants/app.constants';
-import { AutoColorPipe } from "../../common/pipes/is-dark-color.pipe";
+import { AutoColorPipe } from '../../common/pipes/auto-color.pipe'
 
 @Component({
   selector: 'app-desktop-ui-landing',
@@ -13,9 +12,9 @@ import { AutoColorPipe } from "../../common/pipes/is-dark-color.pipe";
   encapsulation: ViewEncapsulation.None
 })
 export class DesktopUiLandingComponent {
-  palette: ColorI = PALETTE;
+  palette: WritableSignal<ColorI>;
 
   constructor(private appService: AppService) {
-    this.appService.palette$.subscribe(p => { if(p) this.palette = p });
+    this.palette = appService.getPalette();
   }
 }

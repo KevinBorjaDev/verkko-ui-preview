@@ -1,8 +1,21 @@
 @import "tailwindcss";
 @plugin "daisyui";
+@plugin "daisyui/theme" {
+  name: "garden";
+  default: true;
+  --color-primary: oklch(58.8% 0.158 241.966);
+  --color-secondary: teal;
+}
+
+
+ /* @plugin "daisyui" {
+   themes: light --default, dark --prefersdark, garden;
+   --color-primary: blue;
+ } */
 
 body {
-  font-family: 'Inter';
+  font-family: 'Inter', 'Roboto';
   margin: 0;
   padding: 32px;
+  height: 100vh;
 }

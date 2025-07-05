@@ -3,27 +3,99 @@
   <div class="mockup-phone-display">
     <div class="h-full">
       <!-- STATUS BAR -->
-      <div class="h-10 w-full" [ngStyle]="{ backgroundColor: palette.PRIMARY}"></div>
+      <div class="h-10 w-full" [ngStyle]="{ backgroundColor: palette().PRIMARY}"></div>
       <!-- HEADER -->
-      <div class="text-center h-15 flex header-shadow relative z-2" [ngStyle]="{ backgroundColor: palette.PRIMARY}"><span
-          class="self-center ml-auto mr-auto" [style.color]="palette.PRIMARY | autoColor">YourApp</span></div>
+      <div class="text-center h-15 flex shadow-md/30 relative z-2" [ngStyle]="{ backgroundColor: palette().PRIMARY}">
+        <span class="self-center ml-auto mr-auto" [style.color]="palette().PRIMARY | autoColor">YourApp</span>
+      </div>
       <!-- CONTENT --->
-      <div class="h-full relative p-6 flex flex-col gap-2" [ngStyle]="{ backgroundColor: palette.BACKGROUND}">
-        <h1 class="text-2xl" [ngStyle]="{ color: palette.TEXT_PRIMARY }">Welcome</h1>
-        <p class="text-lg" [ngStyle]="{ color: palette.TEXT_SECONDARY}">
-          This is an app to help you visualize a color palette of your choice.
-        </p>
+      <div class="h-full relative p-6 flex flex-col gap-9" [ngStyle]="{ backgroundColor: palette().BACKGROUND}">
+        <div>
+          <h1 class="text-2xl font-bold" [ngStyle]="{ color: palette().TEXT_PRIMARY }">Welcome</h1>
+          <p class="text-base" [ngStyle]="{ color: palette().TEXT_SECONDARY}">
+            This is an app to help you visualize a color palette of your choice.
+          </p>
+        </div>
         <!-- CARD -->
-        <div class="card w-fit" [ngStyle]="{ backgroundColor: palette.ACCENT}">
-          <img-placeholder [width]="'100%'" [height]="'150px'"></img-placeholder>
-          <div class="p-2">
-            <h1 class="text-2xl" [ngStyle]="{color: palette.PRIMARY}">This is a Title</h1>
-            <p class="text-sm" [ngStyle]="{ color : palette.TEXT_SECONDARY}"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit amet, voluptate qui consequuntur deserunt delectus ipsum odit atque iste provident magni sapiente quis esse aperiam facere eveniet.</p>
+        <div class="card w-fit shadow-md/12" [ngStyle]="{ backgroundColor: palette().ACCENT }"
+          [style.color]=" palette().ACCENT | autoColor">
+          <img-placeholder [width]="'100%'" [height]="'150px'" [colorAccent]="palette().ACCENT"
+            [colorPrimary]="palette().PRIMARY" [colorSecondary]="palette().SECONDARY"></img-placeholder>
+          <div class="p-4 flex flex-col gap-2">
+            <h1 class="text-2xl tracking-wide font-medium">Card Title</h1>
+            <p class="text-base"> Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+            <div class="flex justify-end gap-2">
+              <button class="button-action font-medium text-sm" [ngStyle]="{backgroundColor: palette().PRIMARY}"
+                [style.color]="palette().PRIMARY | autoColor">Action</button>
+              <button class="button-outlined font-medium text-sm"
+                [ngStyle]="{backgroundColor: palette().SECONDARY,  borderColor: palette().PRIMARY}"
+                [style.color]="palette().SECONDARY | autoColor">Cancel</button>
+            </div>
           </div>
         </div>
+        <!-- BUTTONS -->
+        <div class="flex justify-start w-fit gap-3">
+          <button class="button shadow-md/12 font-medium" [ngStyle]="{ backgroundColor: palette().PRIMARY }"
+            [style.color]="palette().PRIMARY | autoColor" (click)="toggleToast()">
+            @if(showToast()){
+            <span>Hide Toasts</span>
+            } @else {
+            <span>Show Toasts</span>
+            }
+          </button>
+          <button class="button shadow-md/12 font-medium" [ngStyle]="{ backgroundColor: palette().SECONDARY }"
+            [style.color]="palette().SECONDARY | autoColor">Cancel</button>
+        </div>
+        <!-- RADIO BUTTONS -->
+        <div class="flex gap-4">
+          <div class="flex gap-1">
+            <input type="radio" name="radio-1" class="radio" checked="checked" [ngStyle]="{ backgroundColor: palette().SECONDARY, color: palette().PRIMARY }"><label for="radio-1" [ngStyle]="{ color: palette().TEXT_SECONDARY}">Option 1</label>
+          </div>
+          <div class="flex gap-1">
+            <input type="radio" name="radio-1" class="radio" [ngStyle]="{ backgroundColor: palette().SECONDARY, color: palette().PRIMARY }"><label for="radio-1" [ngStyle]="{ color: palette().TEXT_SECONDARY}">Option 2</label>
+          </div>
+        </div>
+        <!-- TOASTS -->
+        @if(showToast()) {
+        <div class="absolute bottom-32 right-8 flex flex-col gap-2 z-50 w-[90%] max-w-xs items-end">
+          <div class="rounded shadow p-4 w-full text-center" [ngStyle]="{ backgroundColor: palette().SUCCESS }"
+            [style.color]="palette().SUCCESS | autoColor">
+            ¡Operación realizada con éxito!
+          </div>
+          <div class="rounded shadow p-4 w-full text-center" [ngStyle]="{ backgroundColor: palette().ERROR}"
+            [style.color]="palette().ERROR | autoColor">
+            Ocurrió un error inesperado.
+          </div>
+        </div>
+        }
+        <!-- FLOATING BUTTON -->
         <button
-          class="absolute p-0 b-0 bottom-32 right-6 size-16 rounded-full flex items-center justify-center text-2xl"
-          [ngStyle]="{ backgroundColor: palette.SECONDARY}">+</button>
+          class="absolute p-0 b-0 bottom-48 right-6 size-16 rounded-full flex items-center justify-center text-2xl shadow-md/12"
+          [ngStyle]="{ backgroundColor: palette().PRIMARY}" [style.color]="palette().PRIMARY | autoColor">+</button>
+        <!-- BOTTOM NAVIGATION -->
+        <div class="absolute bottom-25 right-0 w-full h-16 pl-8 pr-8 pt-4 pb-2 flex justify-around"
+          [ngStyle]="{backgroundColor: palette().ACCENT }">
+          <div class="flex flex-col items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+              <path [attr.fill]="palette().PRIMARY" d="M4 21V9l8-6l8 6v12h-6v-7h-4v7z" />
+            </svg>
+            <label [ngStyle]="{color: palette().PRIMARY}" class="text-xs">Home</label>
+          </div>
+          <div class="flex flex-col items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+              <path fill="rgba(0,0,0,0.8)"
+                d="m12.1 18.55l-.1.1l-.11-.1C7.14 14.24 4 11.39 4 8.5C4 6.5 5.5 5 7.5 5c1.54 0 3.04 1 3.57 2.36h1.86C13.46 6 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5c0 2.89-3.14 5.74-7.9 10.05M16.5 3c-1.74 0-3.41.81-4.5 2.08C10.91 3.81 9.24 3 7.5 3C4.42 3 2 5.41 2 8.5c0 3.77 3.4 6.86 8.55 11.53L12 21.35l1.45-1.32C18.6 15.36 22 12.27 22 8.5C22 5.41 19.58 3 16.5 3" />
+            </svg>
+            <label [ngStyle]="{color: 'rgba(0,0,0,0.8)'}" class="text-xs">Favorites</label>
+          </div>
+          <div class="flex flex-col items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+              <path fill="rgba(0,0,0,0.8)"
+                d="M12 8a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 2a2 2 0 0 0-2 2a2 2 0 0 0 2 2a2 2 0 0 0 2-2a2 2 0 0 0-2-2m-2 12c-.25 0-.46-.18-.5-.42l-.37-2.65c-.63-.25-1.17-.59-1.69-.99l-2.49 1.01c-.22.08-.49 0-.61-.22l-2-3.46a.493.493 0 0 1 .12-.64l2.11-1.66L4.5 12l.07-1l-2.11-1.63a.493.493 0 0 1-.12-.64l2-3.46c.12-.22.39-.31.61-.22l2.49 1c.52-.39 1.06-.73 1.69-.98l.37-2.65c.04-.24.25-.42.5-.42h4c.25 0 .46.18.5.42l.37 2.65c.63.25 1.17.59 1.69.98l2.49-1c.22-.09.49 0 .61.22l2 3.46c.13.22.07.49-.12.64L19.43 11l.07 1l-.07 1l2.11 1.63c.19.15.25.42.12.64l-2 3.46c-.12.22-.39.31-.61.22l-2.49-1c-.52.39-1.06.73-1.69.98l-.37 2.65c-.04.24-.25.42-.5.42zm1.25-18l-.37 2.61c-1.2.25-2.26.89-3.03 1.78L5.44 7.35l-.75 1.3L6.8 10.2a5.55 5.55 0 0 0 0 3.6l-2.12 1.56l.75 1.3l2.43-1.04c.77.88 1.82 1.52 3.01 1.76l.37 2.62h1.52l.37-2.61c1.19-.25 2.24-.89 3.01-1.77l2.43 1.04l.75-1.3l-2.12-1.55c.4-1.17.4-2.44 0-3.61l2.11-1.55l-.75-1.3l-2.41 1.04a5.42 5.42 0 0 0-3.03-1.77L12.75 4z" />
+            </svg>
+            <label [ngStyle]="{color: 'rgba(0,0,0,0.8)'}" class="text-xs">Settings</label>
+          </div>
+        </div>
       </div>
     </div>
   </div>

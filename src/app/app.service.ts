@@ -1,26 +1,27 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Injectable, signal } from '@angular/core';
+import { Mode, PALETTE } from './common/constants/app.constants';
 import { ColorI } from './common/interfaces/color.interface';
-import { Mode } from './common/constants/app.constants';
 
 @Injectable({ providedIn: 'root' })
 export class AppService {
-  private modeSubject = new BehaviorSubject<Mode>('desktop');
-  mode$ = this.modeSubject.asObservable();
 
-  private paletteSubject = new BehaviorSubject< ColorI | null>(null);
-  palette$ = this.paletteSubject.asObservable();
+  private mode = signal<Mode>('desktop');
+  private palette = signal<ColorI>(PALETTE);
 
-  setPalette(colors: ColorI) {
-    this.paletteSubject.next(colors);
+  getPalette() {
+    return this.palette;
+  }
+
+  setPalette(palette: ColorI) {
+    this.palette.set(palette);
   }
 
   setMode(mode: Mode) {
-    this.modeSubject.next(mode);
+    this.mode.set(mode);
   }
 
-  getMode(){
-    return this.modeSubject.getValue();
+  getMode() {
+    return this.mode();
   }
-  
+
 }

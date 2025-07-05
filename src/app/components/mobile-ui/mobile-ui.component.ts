@@ -1,10 +1,9 @@
-import { Component } from '@angular/core';
-import { AppService } from '../../app.service';
 import { CommonModule } from '@angular/common';
-import { ColorI } from '../../common/interfaces/color.interface';
-import { PALETTE } from '../../common/constants/app.constants';
-import { AutoColorPipe } from "../../common/pipes/is-dark-color.pipe";
+import { Component, signal, WritableSignal } from '@angular/core';
+import { AppService } from '../../app.service';
 import { ImgPlaceholderComponent } from "../../common/components/img-placeholder/img-placeholder.component";
+import { ColorI } from '../../common/interfaces/color.interface';
+import { AutoColorPipe } from '../../common/pipes/auto-color.pipe'
 
 @Component({
   selector: 'app-mobile-ui',
@@ -13,9 +12,14 @@ import { ImgPlaceholderComponent } from "../../common/components/img-placeholder
   styleUrl: './mobile-ui.component.css'
 })
 export class MobileUiComponent {
- palette: ColorI = PALETTE;
+ palette: WritableSignal<ColorI>;
+ showToast = signal(false);
 
   constructor(private appService: AppService) {
-    this.appService.palette$.subscribe(p => { if(p) this.palette = p });
+    this.palette = this.appService.getPalette();
+  }
+
+  toggleToast(){
+    this.showToast.update(val => !val);
   }
 }

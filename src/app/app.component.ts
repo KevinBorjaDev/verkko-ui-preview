@@ -13,10 +13,11 @@ import { CommonModule } from '@angular/common';
 })
 export class AppComponent {
   appService = inject(AppService)
-  mode!: string;
 
-  constructor(){
-    this.appService.mode$.subscribe((value) => this.mode = value);
+  constructor(){}
+
+  get mode(){
+    return this.appService.getMode();
   }
 
 }

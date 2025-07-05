@@ -7,7 +7,9 @@ import { Component, input } from '@angular/core';
   styleUrl: './img-placeholder.component.css'
 })
 export class ImgPlaceholderComponent {
-
   width = input.required<string>();
   height = input.required<string>();
+  colorPrimary = input<string>('gray');
+  colorSecondary = input<string>('gray');
+  colorAccent = input<string>('gray');
 }
